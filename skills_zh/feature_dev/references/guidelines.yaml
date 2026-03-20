@@ -1,0 +1,33 @@
+# Guidelines (审计标准) — Reviewer 静态引擎核对每一条规则
+
+guidelines:
+  - "最终给出的实现代码必须丝毫不差地满足验收标准 (AC) 中的全部要求"
+  - "所有新写的方法、函数或类，都必须配有对应的单元测试代码"
+  - "新代码的缩进、风格、模式必须效仿该项目原有的存量代码风格，不能画风突变"
+  - "处理逻辑必须健壮，涵盖所有可能的失败或异常分支报错"
+  - "除非用户明确要求了破坏性更新，否则所有修改必须完全向后兼容"
+  - "给外界调用的公共接口 / 类必须写好 Docstrings 或清晰的注释"
+  - "严禁使用神秘的硬编码数值 (Hardcoded values) — 全部改成常量枚举或配置读取"
+
+rules:
+  - type: format_verify
+    rule: "核心板块覆盖率"
+    format: markdown
+    headings:
+      - "代码实现"
+      - "单元测试"
+
+  - type: regex_match
+    rule: "必须包含代码片段"
+    pattern: "```"
+    case_insensitive: false
+
+  - type: length_limit
+    rule: "内容充实度限制"
+    min_chars: 150
+    min_lines: 8
+
+  - type: regex_exclude
+    rule: "禁止存在占位符"
+    pattern: "\\[TODO\\]|\\[占位符\\]"
+    case_insensitive: true

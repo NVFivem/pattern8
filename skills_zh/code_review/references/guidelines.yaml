@@ -1,0 +1,44 @@
+# Guidelines (审计标准) — Reviewer（审查员）进行闭环评估时使用的执法准则
+
+guidelines:
+  - "指出的每一个问题都必须带上具体的代码行号或者精确的代码片段引用"
+  - "安全漏洞必须能够根据 OWASP Top 10 进行分类"
+  - "提出的每一个修改建议，都必须附带具体的修复代码"
+  - "审查报告必须实打实地覆盖 4 大维度：正确性、安全性、性能和可维护性"
+
+# 结构化规则 (由底层的静态引擎强制机器执行)
+rules:
+  - type: format_verify
+    rule: "四大核心维度覆盖率检查"
+    format: markdown
+    headings:
+      - "正确性"
+      - "安全性"
+      - "性能表现"
+      - "可维护性"
+
+  - type: regex_match
+    rule: "确认是否包含行号引用"
+    pattern: "(行|Line|L)\\s*\\d+"
+    case_insensitive: true
+
+  - type: regex_match
+    rule: "严重程度分类检查"
+    pattern: "(严重|高|中|低)"
+    case_insensitive: false
+
+  - type: length_limit
+    rule: "内容充实度最低字符限制"
+    min_chars: 200
+    min_lines: 10
+
+  - type: contains
+    rule: "是否包含 Diff 代码修复"
+    texts:
+      - "diff"
+    case_insensitive: true
+
+  - type: regex_exclude
+    rule: "禁止存在占位符"
+    pattern: "\\[TODO\\]|\\[占位符\\]"
+    case_insensitive: true

@@ -1,0 +1,32 @@
+# Guidelines (审计标准) — Reviewer 静态引擎核对每一条规则
+
+guidelines:
+  - "根因分析必须直指核心逻辑漏洞，绝不能只是描述表象症状"
+  - "给出的修复代码必须从根本上去掉错误，而不是用 try/catch 等手段掩盖问题"
+  - "代码的修复绝对不允许引入新的 Bug 或者破坏其余的正常功能"
+  - "代码变动 (Diff) 必须做到克制和最小化 — 只改该改的地方，绝不要过度修改"
+  - "必须记录和思考极端边界情况 (Edge cases)"
+  - "影响面评估必须穷举出该修复可能波及的所有其他上下游模块"
+
+rules:
+  - type: format_verify
+    rule: "核心板块结构覆盖率检查"
+    format: markdown
+    headings:
+      - "根因分析"
+      - "修复代码"
+
+  - type: regex_match
+    rule: "是否引用了带有后缀名的文件路径"
+    pattern: "[a-zA-Z_/]+\\.[a-zA-Z]{1,5}"
+    case_insensitive: false
+
+  - type: length_limit
+    rule: "内容充实度最低字符限制"
+    min_chars: 100
+    min_lines: 5
+
+  - type: regex_exclude
+    rule: "禁止存在占位符"
+    pattern: "\\[TODO\\]|\\[占位符\\]"
+    case_insensitive: true

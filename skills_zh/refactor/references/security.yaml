@@ -1,0 +1,35 @@
+# Refactoring Security Red Lines (重构原则性安全红线)
+
+security:
+  - "未经用户明确允许，绝对严禁在重构中私自修改对外暴露的公共 API 的行为表现"
+  - "即使原代码的错误处理或入参校验逻辑写得很丑，重构时也绝对不可将其删除"
+  - "禁止在重构底层代码时，引入会让上层依赖模块直接报错崩溃的破坏性更改 (Breaking changes)"
+  - "为了保证重构前后的等价性，绝对不允许删掉原有的任何单元测试代码"
+
+tool_安全护栏:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

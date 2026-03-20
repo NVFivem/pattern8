@@ -1,0 +1,38 @@
+# Security Red Lines (安全红线) — 绝对不能触碰的底线
+# 任何违规操作都会触发 CRITICAL_FAIL — 导致流水线被立即强制熔断。
+
+security:
+  - "生成的需求文档示例中，坚决不允许包含任何真实用户的隐私数据 (姓名、邮箱、手机号)"
+  - "文档方案中不允许包含削弱身份认证体系或建议在生产环境关闭安全特性的要求"
+  - "绝对不允许在设计中建议用明文存储用户密码"
+  - "禁止在对外的需求文档中直接引用公司内部高度机密的网络架构细节或服务器 IP"
+  - "禁止在说明文档里包含带有后门或一键可利用提权的恶意代码片段"
+
+# Tool Security Config — 工具集安全护栏围栏配置
+tool_security:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

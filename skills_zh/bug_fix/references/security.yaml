@@ -1,0 +1,36 @@
+# Bug Fix Security Red Lines (缺陷修复最高安全红线)
+
+security:
+  - "禁止为了掩盖 Bug 而强行删除报错抛出逻辑或禁用异常捕获"
+  - "禁止采用'绕过身份认证/鉴权'作为所谓的修复方案"
+  - "禁止为了修 Bug 而隐藏或压制关键的错误日志"
+  - "禁止在修复方案中引入硬编码的登录凭据或是测试账号"
+  - "禁止为了解决输入报错而擅自移除安全过滤或入参检验逻辑"
+
+tool_安全护栏:
+  blacklist:
+    - "rm -rf *"
+    - "rm -r /"
+    - "mkfs*"
+    - "dd if=*"
+    - "chmod 777*"
+    - "curl * | sh"
+    - "wget * | sh"
+    - "eval *"
+    - "sudo *"
+    - "shutdown*"
+    - "reboot*"
+    - "> /dev/sda*"
+
+  allowed_paths:
+    - "./"
+
+  denied_paths:
+    - "/etc"
+    - "/root"
+    - "~/.ssh"
+    - "~/.aws"
+    - "/System"
+
+  write_protection: false
+  max_shell_timeout: 30

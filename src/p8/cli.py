@@ -162,7 +162,8 @@ def validate(skill_path: str):
 @main.command("new")
 @click.argument("skill_name")
 @click.option("--dir", "-d", "skills_dir", default="skills", help="Parent directory")
-def new_skill(skill_name: str, skills_dir: str):
+@click.option("--lang", default="en", type=click.Choice(["en", "zh"]), help="Language for the SKILL templates")
+def new_skill(skill_name: str, skills_dir: str, lang: str):
     """
     Create a new SKILL scaffold.
     """
@@ -178,7 +179,74 @@ def new_skill(skill_name: str, skills_dir: str):
 
     title = skill_name.replace("_", " ").replace("-", " ").title()
 
-    (skill_dir / "SKILL.md").write_text(f"""---
+    if lang == "zh":
+        (skill_dir / "SKILL.md").write_text(f"""---
+name: {skill_name}
+description: 描述这个 SKILL 约束 Agent 去做什么
+assets:
+  checklist: assets/checklist.yaml
+  template: assets/template.yaml
+references:
+  guidelines: references/guidelines.yaml
+  security: references/security.yaml
+---
+
+# {title}
+
+[描述这个 SKILL 如何约束 Agent 的行为]
+
+<PIPELINE>
+
+## 第 1 步：反转追问 (对齐前提)
+Agent 必须在开始前检查 `assets/checklist.yaml` 中的每个项目。
+如果缺少任何必要信息，Agent 必须**停下来提问**，绝不能跳过。
+
+## 第 2 步：生成器 (约束输出模板)
+Agent 的输出必须严格符合 `assets/template.yaml` 中定义的格式。
+不可以出格 — 模板中的每一个字段都必须被填充。
+
+## 第 3 步：工具围栏 (安全网)
+如果需要调用工具，Agent 必须先检查 `references/security.yaml`。
+必须立刻拦截并拒绝黑名单指令的调用。
+
+## 第 4 步：审查员 (闭环自验)
+Agent 必须结合 `references/guidelines.yaml` 来倒逼审查自己的输出。
+如果不合规，退回第 2 步重新生成，最多重试 3 次。
+
+</PIPELINE>
+""")
+
+        (skill_dir / "assets" / "checklist.yaml").write_text(f"""# {skill_name} 准入清单
+# Agent 在动手干活前必须先确认以下所有信息
+checklist:
+  - "在这里添加需要确认的清单项目"
+""")
+
+        (skill_dir / "assets" / "template.yaml").write_text(f"""# {skill_name} 输出模板
+# Agent 输出的内容格式必须且只能长这样
+template: |
+  # 标题名称
+
+  ## 模块或者版块 1
+  [内容]
+
+  ## 模块 2
+  [内容]
+""")
+
+        (skill_dir / "references" / "guidelines.yaml").write_text(f"""# {skill_name} 审计标准
+# Agent 在输出之后，要对照这些标准自己做代码审查或评价方案 (Self-Audit)
+guidelines:
+  - "在这里添加审计标准"
+""")
+
+        (skill_dir / "references" / "security.yaml").write_text(f"""# {skill_name} 安全红线
+# Agent 绝对不能越过或突破的安全底线
+security:
+  - "在这里添加安全底线规则"
+""")
+    else:
+        (skill_dir / "SKILL.md").write_text(f"""---
 name: {skill_name}
 description: Describe what this SKILL constrains the Agent to do
 assets:
@@ -214,13 +282,13 @@ If non-compliant, roll back to Step 2 and regenerate, up to 3 retries.
 </PIPELINE>
 """)
 
-    (skill_dir / "assets" / "checklist.yaml").write_text(f"""# {skill_name} Checklist
+        (skill_dir / "assets" / "checklist.yaml").write_text(f"""# {skill_name} Checklist
 # Agent must confirm ALL items before starting work
 checklist:
   - "Add checklist items here"
 """)
 
-    (skill_dir / "assets" / "template.yaml").write_text(f"""# {skill_name} Output Template
+        (skill_dir / "assets" / "template.yaml").write_text(f"""# {skill_name} Output Template
 # Agent must output in exactly this format
 template: |
   # Output Title
@@ -232,13 +300,13 @@ template: |
   [Content]
 """)
 
-    (skill_dir / "references" / "guidelines.yaml").write_text(f"""# {skill_name} Audit Guidelines
+        (skill_dir / "references" / "guidelines.yaml").write_text(f"""# {skill_name} Audit Guidelines
 # Agent audits its own output against these standards
 guidelines:
   - "Add audit guidelines here"
 """)
 
-    (skill_dir / "references" / "security.yaml").write_text(f"""# {skill_name} Security Red Lines
+        (skill_dir / "references" / "security.yaml").write_text(f"""# {skill_name} Security Red Lines
 # Agent must NEVER violate these rules
 security:
   - "Add security rules here"
@@ -259,7 +327,8 @@ security:
 
 @main.command("init")
 @click.argument("target", default=".")
-def init_project(target: str):
+@click.option("--lang", default="en", type=click.Choice(["en", "zh"]), help="Language for the built-in SKILLs")
+def init_project(target: str, lang: str):
     """
     Initialize P8 governance in a project.
 
@@ -282,10 +351,14 @@ def init_project(target: str):
     p8_root = Path(__file__).parent
     # Dev mode: skills/ at project root
     # Installed mode: skills/ packaged in p8/scaffold/skills/
-    dev_skills = p8_root.parent.parent / "skills"
-    pkg_skills = p8_root / "scaffold" / "skills"
-    dev_agents = p8_root.parent.parent / "AGENTS.md"
-    pkg_agents = p8_root / "scaffold" / "AGENTS.md"
+    
+    skills_folder = "skills_zh" if lang == "zh" else "skills"
+    agents_file = "AGENTS_zh-CN.md" if lang == "zh" else "AGENTS.md"
+    
+    dev_skills = p8_root.parent.parent / skills_folder
+    pkg_skills = p8_root / "scaffold" / skills_folder
+    dev_agents = p8_root.parent.parent / agents_file
+    pkg_agents = p8_root / "scaffold" / agents_file
 
     source_skills = dev_skills if dev_skills.exists() else pkg_skills
     source_agents = dev_agents if dev_agents.exists() else pkg_agents

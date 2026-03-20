@@ -1,0 +1,31 @@
+# Guidelines (审计标准) — Reviewer 静态引擎核对每一条规则
+
+guidelines:
+  - "新产出的代码在功能业务表现上，必须和原版代码严丝合缝地等价"
+  - "除非用户特别大声地明确要求，否则绝对不准改动对外界暴露的 API 入参要求或返回值类型"
+  - "每一步的重构切分（如抽离函数）必须要带有清晰合理的解释"
+  - "重构后代码的整体圈复杂度 (Cyclomatic complexity) 和嵌套层级必须实质性下降"
+  - "修改点必须足够纯粹 — 不要在一个文件里同时夹带做重构和做新需求"
+  - "重写的新代码必须沿用原项目的变量命名法和老手感，不要突兀引入新的规范"
+
+rules:
+  - type: format_verify
+    rule: "核心板块覆盖率"
+    format: markdown
+    headings:
+      - "重构行动计划"
+
+  - type: regex_match
+    rule: "必须包含代码差异演示"
+    pattern: "(diff|```|原代码|新代码)"
+    case_insensitive: true
+
+  - type: length_limit
+    rule: "内容充实度最低字符限制"
+    min_chars: 100
+    min_lines: 5
+
+  - type: regex_exclude
+    rule: "禁止存在占位符"
+    pattern: "\\[TODO\\]|\\[占位符\\]"
+    case_insensitive: true
