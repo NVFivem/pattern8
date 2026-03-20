@@ -1,5 +1,5 @@
 ---
-name: example
+name: prd
 description: Constrains the Agent to generate structured Product Requirements Documents (PRDs) with quality and completeness guarantees.
 assets:
   checklist: assets/checklist.yaml

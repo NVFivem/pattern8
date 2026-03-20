@@ -364,7 +364,7 @@ def init_project(target: str):
     click.echo(f"    cd {target_path.name}" if target != "." else "")
     click.echo("    p8 list                    # View SKILLs")
     click.echo("    p8 new my_custom_skill     # Create custom SKILL")
-    click.echo("    p8 validate skills/example # Validate SKILL")
+    click.echo("    p8 validate skills/prd     # Validate SKILL")
     click.echo("    p8 serve                   # Start MCP enforcement server")
     click.echo()
 

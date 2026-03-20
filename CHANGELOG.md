@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - 🎱 Initial public release
-- 5 built-in SKILLs: `example`, `code_review`, `bug_fix`, `feature_dev`, `refactor`
+- 5 built-in SKILLs: `prd`, `code_review`, `bug_fix`, `feature_dev`, `refactor`
 - CLI tool: `p8 init`, `p8 list`, `p8 validate`, `p8 new`, `p8 serve`, `p8 mcp-config`
 - MCP enforcement server with 2 tools: `submit_review`, `execute_tool`
 - SecurityGuard — regex blacklist + path restrictions + write protection

@@ -35,7 +35,7 @@ class TestSkillIntegrity:
     """Test built-in SKILL integrity."""
 
     SKILLS_DIR = Path(__file__).parent.parent / "skills"
-    EXPECTED_SKILLS = ["example", "code_review", "bug_fix", "refactor", "feature_dev"]
+    EXPECTED_SKILLS = ["prd", "code_review", "bug_fix", "refactor", "feature_dev"]
 
     def test_all_skills_exist(self):
         """All expected SKILL directories exist."""

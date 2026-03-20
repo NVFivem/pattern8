@@ -84,7 +84,7 @@ class TestSecurityGuard:
 
 class TestSecurityConfigLoading:
 
-    EXAMPLE_SECURITY = Path(__file__).parent.parent / "skills" / "example" / "references" / "security.yaml"
+    EXAMPLE_SECURITY = Path(__file__).parent.parent / "skills" / "prd" / "references" / "security.yaml"
 
     def test_load_example_security(self):
         from p8.enforcement.security_guard import load_security_config
@@ -289,14 +289,14 @@ class TestMCPTools:
     def test_execute_tool_blocks_rm_rf(self):
         from p8.enforcement.mcp_server import handle_tool_call
         result = self._run(handle_tool_call("execute_tool", {
-            "command": "rm -rf /", "skill": "example",
+            "command": "rm -rf /", "skill": "prd",
         }))
         assert result["allowed"] is False
 
     def test_execute_tool_allows_safe(self):
         from p8.enforcement.mcp_server import handle_tool_call
         result = self._run(handle_tool_call("execute_tool", {
-            "command": "ls -la", "skill": "example",
+            "command": "ls -la", "skill": "prd",
         }))
         assert result["allowed"] is True
 

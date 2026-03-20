@@ -24,7 +24,7 @@ src/p8/
     └── mcp_server.py         # MCP enforcement interface (3 Resources + 2 Tools)
 
 skills/                       # Law files (developer-customizable)
-├── example/                  # Example SKILL (PRD generation)
+├── prd/                      # PRD generation SKILL
 ├── code_review/              # Code review constraints
 ├── bug_fix/                  # Bug fix constraints
 ├── refactor/                 # Refactoring constraints

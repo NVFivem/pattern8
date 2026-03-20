@@ -73,7 +73,7 @@ async def _handle_submit_review(args: dict[str, Any]) -> dict[str, Any]:
     from p8.enforcement.reviewer import review_output
 
     content = args.get("content", "")
-    skill_name = args.get("skill", "example")
+    skill_name = args.get("skill", "prd")
 
     # Internally load rules (Agent doesn't know these files exist)
     guidelines_path = _find_skill_file(skill_name, "references/guidelines.yaml")
@@ -91,7 +91,7 @@ async def _handle_execute_tool(args: dict[str, Any]) -> dict[str, Any]:
     """Request OS action execution. Internally checked by SecurityGuard."""
     from p8.enforcement.security_guard import load_security_config
 
-    skill_name = args.get("skill", "example")
+    skill_name = args.get("skill", "prd")
 
     # Internally load security rules (Agent doesn't know the check rules)
     security_yaml = _find_skill_file(skill_name, "references/security.yaml")

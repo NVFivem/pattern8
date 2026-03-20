@@ -22,12 +22,12 @@ Initialized empty Git repository
 
 $ p8 init
 ✅ Created AGENTS.md
-✅ Created skills/ (5 SKILLs: example, code_review, bug_fix, refactor, feature_dev)
+✅ Created skills/ (5 SKILLs: prd, code_review, bug_fix, refactor, feature_dev)
 ✅ Installed pre-commit hook
 ✅ Created .cursor/rules/p8-enforcement.mdc
 
 $ p8 list
-  example       — PRD document generation
+  prd           — PRD document generation
   code_review   — Code review enforcement
   bug_fix       — Bug fix process enforcement
   feature_dev   — Feature development enforcement
@@ -67,7 +67,7 @@ After running `p8 init`, your project will have:
 my-project/
 ├── AGENTS.md                          # Global rules all Agents must follow
 ├── skills/                            # 5 built-in governance SKILLs
-│   ├── example/                       # PRD document generation
+│   ├── prd/                           # PRD document generation
 │   ├── code_review/                   # Code review enforcement
 │   ├── bug_fix/                       # Bug fix process enforcement
 │   ├── feature_dev/                   # Feature development enforcement
@@ -199,7 +199,7 @@ security:
 
 | SKILL | Use Case | What Agent Does |
 |-------|----------|----------------|
-| `example` | PRD generation | Gathers requirements → generates structured PRD |
+| `prd` | PRD generation | Gathers requirements → generates structured PRD |
 | `code_review` | Code review | Reads code → finds issues → reports with line numbers |
 | `bug_fix` | Bug fixing | Reproduces → root cause → fix → regression test |
 | `refactor` | Refactoring | Analyzes → refactors → verifies functional equivalence |
