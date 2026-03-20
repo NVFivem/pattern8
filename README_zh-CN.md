@@ -13,11 +13,7 @@
 [![Coverage](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg?style=for-the-badge)](https://github.com/Aquifer-sea/pattern8/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-**[ 📚 阅读文档 ](#) • [ 💬 加入 Discord ](#) • [ 🐦 Twitter ](#) • [ 🇺🇸 English](README.md)**
-</div>
-
-<div align="center">
-  <img src="https://via.placeholder.com/800x400/000000/FFFFFF/?text=[+PLACEHOLDER+FOR+KILLER+DEMO+GIF+]" alt="P8 拦截危险指令" width="100%" />
+**[ 🇺🇸 English](README.md)**
 </div>
 
 ---
